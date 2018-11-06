@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo chooser</title>
+
+    <style>
+
+        body{
+            font-family: 'Copse', Serif;
+            text-align: center;
+        }
+        div.naturepicture{
+            box-sizing: border-box;
+            height: 450px;
+            width: 500px;
+            float: left;
+            border: solid 1px black;
+        }
+        div.favoriet {
+            width: 500px;
+            height: 150px;
+            background-color: blue;
+            background-image: none;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        #pics{
+            width: 1500px;
+            height: 1350px;
+            border: solid 1px black;
+            font-size: 0px;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--HTML-->
+<h1>Nature chooser</h1>
+<h3>Choose your favorite Nature Picture</h3>
+<div id="pics">
+
+</div>
+
+<!--JAVASCRIPT-->
+<script>
+    var pics = document.getElementById("pics");
+    createPicsHolders();
+    createNatureImages();
+
+    function createPicsHolders(){
+        for(var i = 0; i < 9; i++) {
+            var pictureHolder = document.createElement("div");
+            pictureHolder.className = "naturepicture";
+            pictureHolder.id = "picture-holder-" + i;
+            pics.appendChild(pictureHolder);
+        }
+    }
+    function createNatureImages() {
+        var pictureHolders = document.getElementsByClassName("naturepicture");
+        for (var i = 0; i < pictureHolders.length; i++) {
+            let favoriet = document.createElement("div");
+            favoriet.className = "favoriet";
+            favoriet.id =  "favoriet" + i;
+            var natuurPlaatje = document.createElement("img");
+            natuurPlaatje.src = "img/shuffle" + (i+1) + ".jpg";
+            natuurPlaatje.id = (i);
+            natuurPlaatje.addEventListener("click", function () {
+               maakFavoriet(this.id) ;
+            });
+            
+            pictureHolders[i].appendChild(favoriet);
+            pictureHolders[i].appendChild(natuurPlaatje);
+        }
+    }
+    function maakFavoriet(id) {
+        console.log("Maak mij Favoriet! Het gaat om de natuur..." + id);
+        let favoriet = document.getElementById("favoriet" + id);
+         let notsofavoriet = document.getElementsByClassName("favoriet");
+        for (var i = 0; i < notsofavoriet.length; i++){
+            notsofavoriet [i].style.backgroundSize = "none";
+        }
+        favoriet.style.backgroundColor = 'gold';
+        favoriet.style.margin = '0 auto';
+        favoriet.style.background = "url('img/heart.png')";
+        favoriet.style.backgroundSize = 'cover';
+        favoriet.style.width="150px";
+        favoriet.style.height="100px";
+
+        console.log(favoriet);
+    }
+</script>
+</body>
+
+
+</html>
